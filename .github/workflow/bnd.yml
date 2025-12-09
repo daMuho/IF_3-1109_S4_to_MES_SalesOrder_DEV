@@ -17,7 +17,7 @@ permissions:
   
 env:
   # Directory where the extracted iFlow content will be placed
-  IFLOW_DIR: iFlow-Artifacts
+  IFLOW_DIR: Archive
   # Set the technical ID from the workflow input
   IFLOW_ID: ${{ github.event.inputs.iflow_id }}
 
