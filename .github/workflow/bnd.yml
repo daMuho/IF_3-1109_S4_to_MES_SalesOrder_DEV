@@ -29,16 +29,22 @@ jobs:
         uses: actions/checkout@v4
 
       # --- CPI Download and Extraction ---
-      - name: Create Artifact Directory
-        run: |
+      - name: Clean Input String
+        run: |   
+          # Clean Input String
           INPUT_STRING="${{ env.IFLOW_ID }}"
           CLEANED_STRING=$( echo "${INPUT_STRING}" | tr -d '-' )
-
+          ${{ env.IFLOW_ID }}=${CLEANED_STRING}          
           echo "Original String: ${INPUT_STRING}"
           echo "Cleaned String: ${CLEANED_STRING}"
+          echo "New IFLOW ID: ${{ env.IFLOW_ID }}"
+
           
+      - name: Create Artifact Directory for Archive
+        run: |
+          # Create Artifact Archive directory         
           mkdir -p ${{ env.IFLOW_DIR }}/${CLEANED_STRING}
-          #mkdir -p ${{ env.IFLOW_DIR }}/${{ env.IFLOW_ID }}
+
           # Create a temporary file path for the downloaded ZIP
           echo "ZIP_PATH=${{ runner.temp }}/${CLEANED_STRING}.zip" >> $GITHUB_ENV
           #echo "ZIP_PATH=${{ runner.temp }}/${{ env.IFLOW_ID }}.zip" >> $GITHUB_ENV
